@@ -13,22 +13,26 @@ pool:
 steps:
 - task: NodeTool@0
   inputs:
-    versionSpec: '10.x'
+    versionSource: 'spec'
+    versionSpec: '18.x'
   displayName: 'Install Node.js'
 
 - task: Npm@1
   inputs:
     command: 'install'
     workingDir: 'template-service/src/Client/'
+  displayName: 'npm install'
 
 - task: Npm@1
   inputs:
     command: 'custom'
     workingDir: 'template-service/src/Client/'
     customCommand: 'run build'
+  displayName: "npm run build"
 
 - task: PublishBuildArtifacts@1
   inputs:
     PathtoPublish: 'build'
     ArtifactName: 'drop'
     publishLocation: 'Container'
+  displayName: "publish artifact"
