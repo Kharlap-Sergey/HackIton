@@ -31,4 +31,7 @@ steps:
   displayName: "npm run build"
 
 - task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: 'template-service/src/Client/dist'
+    ArtifactName: 'drop'
   displayName: "publish artifact"
