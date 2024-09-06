@@ -11,9 +11,20 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new ArgumentException("Postgres db connection string is missed");
-Console.WriteLine(connectionString);
-builder.Services.AddPgStorage(connectionString);
+if (builder.Configuration["DataBase:Provider"] == "InMemory")
+{
+    builder.Services.AddDbContext<DataDbContext>(options =>
+    {
+        options.UseInMemoryDatabase("ApiDb");
+    });
+}
+else
+{
+    var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new ArgumentException("Postgres db connection string is missed");
+    Console.WriteLine(connectionString);
+    builder.Services.AddPgStorage(connectionString);
+}
+
 builder.Services.AddEntityRepo();
 
 var app = builder.Build();
