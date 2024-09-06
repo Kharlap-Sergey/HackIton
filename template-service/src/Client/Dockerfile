@@ -2,11 +2,11 @@ FROM node:18-alpine
 
 WORKDIR /app/client
 
-COPY package.json .
+COPY src/Client/package.json .
 
 RUN npm install
 
-COPY . .
+COPY src/Client .
 
 RUN npm run build
 

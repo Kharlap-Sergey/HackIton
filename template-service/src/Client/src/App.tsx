@@ -1,20 +1,27 @@
-import { useState } from "react";
+import {
+  Route,
+  createBrowserRouter,
+  createRoutesFromElements,
+  RouterProvider,
+} from "react-router-dom";
 
-import { Button } from "@/components/ui/button";
+import { HomePage, TestPage } from "./pages";
 
-function App() {
-  const [count, setCount] = useState(0);
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route path="/">
+      <Route index element={<HomePage />} />
+      <Route path="test" element={<TestPage />} />
+    </Route>
+  )
+);
 
+const App = () => {
   return (
-    <div className="flex items-center justify-center min-h-screen flex-col items-center">
-      <h2 className="scroll-m-20 pb-2 text-3xl font-semibold tracking-tight first:mt-0 mb-2">
-        Vite + React + TS
-      </h2>
-      <Button onClick={() => setCount((count) => count + 1)}>
-        count is {count}
-      </Button>
-    </div>
+    <>
+      <RouterProvider router={router} />
+    </>
   );
-}
+};
 
 export default App;

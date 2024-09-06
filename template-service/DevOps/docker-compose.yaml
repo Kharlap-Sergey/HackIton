@@ -24,5 +24,13 @@ services:
       - postgres
     environment:
       ConnectionStrings__DefaultConnection: Host=postgres;Port=5432;Database=test;Username=myusername;Password=mypassword 
+
+  client:
+    build:
+      dockerfile: src/Client/Dockerfile
+      context: ../
+    container_name: client_container
+    ports:
+      - 8080:8080
 volumes:
   postgres_data:
