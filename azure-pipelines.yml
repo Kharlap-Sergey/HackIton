@@ -13,19 +13,23 @@ variables:
   solution: '**/*.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
+  projectFile: 'template-service/template.sln'
 
 steps:
 - task: NuGetToolInstaller@1
 
 - task: NuGetCommand@2
+  displayName: "Nuget Restore"
   inputs:
     restoreSolution: '$(solution)'
 
-- task: VSBuild@1
+- task: DotNetCoreCLI@2
+  displayName: "Publishing"
   inputs:
-    solution: '$(solution)'
-    msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:DesktopBuildPackageLocation="$(build.artifactstagingdirectory)\WebApp.zip"'
-    platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
+    command: 'publish'
+    publishWebProjects: false
+    projects: $(projectFile)
+    arguments: '--no-restore -o "$(build.artifactstagingdirectory)\WebApp.zip" -c $(buildConfiguration)) --os linux'
+    modifyOutputPath: false
 
 - task: PublishBuildArtifacts@1
