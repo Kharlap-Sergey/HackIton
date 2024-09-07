@@ -10,8 +10,6 @@ pool:
   vmImage: 'windows-latest'
 
 variables:
-  solution: '**/*.sln'
-  buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
   projectFile: 'template-service/template.sln'
 
@@ -19,12 +17,18 @@ steps:
 - task: NuGetToolInstaller@1
 
 - task: DotNetCoreCLI@2
+  inputs:
+    command: 'restore'
+    projects: '$(projectFile)'
+    feedsToUse: 'select'
+
+- task: DotNetCoreCLI@2
   displayName: "Publishing"
   inputs:
     command: 'publish'
-    publishWebProjects: false
+    zipAfterPublish: false
     projects: '$(projectFile)'
-    arguments: '-c $(buildConfiguration) --os linux -o $(Build.ArtifactStagingDirectory)'
+    arguments: '-c $(buildConfiguration) -o $(Build.ArtifactStagingDirectory)'
     modifyOutputPath: false
 
-- task: PublishBuildArtifacts@1
+- task: PublishBuildArtifacts@1 
