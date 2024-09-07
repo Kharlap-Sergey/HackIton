@@ -28,7 +28,7 @@ steps:
     command: 'publish'
     zipAfterPublish: false
     projects: '$(projectFile)'
-    arguments: '-c $(buildConfiguration) -o $(Build.ArtifactStagingDirectory)'
+    arguments: '-c $(buildConfiguration) -o $(Build.ArtifactStagingDirectory) --os linux-x64'
     modifyOutputPath: false
 
 - task: PublishBuildArtifacts@1 
