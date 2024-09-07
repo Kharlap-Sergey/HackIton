@@ -19,17 +19,12 @@ steps:
 - task: NuGetToolInstaller@1
 
 - task: DotNetCoreCLI@2
-  inputs:
-    command: 'restore'
-    projects: '$(solution)'
-
-- task: DotNetCoreCLI@2
   displayName: "Publishing"
   inputs:
     command: 'publish'
     publishWebProjects: false
     projects: $(projectFile)
-    arguments: '-o "$(build.artifactstagingdirectory)\WebApp.zip" -c $(buildConfiguration) --os linux'
+    arguments: '-c $(buildConfiguration) --os linux'
     modifyOutputPath: false
 
 - task: PublishBuildArtifacts@1
