@@ -26,8 +26,7 @@ steps:
   displayName: "Publishing"
   inputs:
     command: 'publish'
-    zipAfterPublish: false
-    projects: '$(projectFile)'
+    publishWebProjects: true
     arguments: '-c $(buildConfiguration) -o $(Build.ArtifactStagingDirectory) --os linux'
     modifyOutputPath: false
 
