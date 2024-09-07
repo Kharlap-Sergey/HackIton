@@ -17,13 +17,11 @@ variables:
 
 steps:
 - task: NuGetToolInstaller@1
-  inputs:
-    versionSpec: '5.8.x'
 
-- task: NuGetCommand@2
-  displayName: "Nuget Restore"
+- task: DotNetCoreCLI@2
   inputs:
-    restoreSolution: '$(solution)'
+    command: 'restore'
+    projects: '$(solution)'
 
 - task: DotNetCoreCLI@2
   displayName: "Publishing"
