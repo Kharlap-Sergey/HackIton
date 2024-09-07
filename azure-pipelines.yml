@@ -23,8 +23,8 @@ steps:
   inputs:
     command: 'publish'
     publishWebProjects: false
-    projects: $(projectFile)
-    arguments: '-c $(buildConfiguration) --os linux'
+    projects: '$(projectFile)'
+    arguments: '-c $(buildConfiguration) --os linux -o $(Build.ArtifactStagingDirectory)'
     modifyOutputPath: false
 
 - task: PublishBuildArtifacts@1
