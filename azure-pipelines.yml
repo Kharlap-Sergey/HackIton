@@ -29,7 +29,7 @@ steps:
     command: 'publish'
     publishWebProjects: false
     projects: $(projectFile)
-    arguments: '--no-restore -o "$(build.artifactstagingdirectory)\WebApp.zip" -c $(buildConfiguration)) --os linux'
+    arguments: '--no-restore -o "$(build.artifactstagingdirectory)\WebApp.zip" -c $(buildConfiguration) --os linux'
     modifyOutputPath: false
 
 - task: PublishBuildArtifacts@1
