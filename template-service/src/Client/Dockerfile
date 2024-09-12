@@ -8,8 +8,8 @@ RUN npm install
 
 COPY src/Client .
 
-RUN npm run build
+RUN npm run build:docker
 
-EXPOSE 8080
+EXPOSE 3000
 
 CMD [ "npm", "run", "preview" ]
