@@ -64,20 +64,6 @@ app.UseHttpsRedirection();
 
 app.UseCors(frontendCorsPolicyName);
 
-app.MapGet("/", (IReadOnlyRepo<Entity, int> repo) =>
-{
-    return repo.GetAsync();
-})
-.WithName("GetAll")
-.WithOpenApi();
-
-app.MapPost("/", ([FromBody]EntityCreateVm entity, IRepo<Entity, int?> repo) =>
-{
-    return repo.AddAsync(new Entity { Name = entity.name });
-})
-.WithName("Add")
-.WithOpenApi();
-
 app.MapPost("/bot", async (ITgBotClient tgClient, Update update) =>
 {
     if (update.Message == null)
