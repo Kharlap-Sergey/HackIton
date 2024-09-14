@@ -9,6 +9,7 @@ namespace Api.Persistence
         {
             this.Database.EnsureCreated();
         }
-        public DbSet<Entity> MyEntities { get; set; }
+
+        public DbSet<TelegramUserInfo> TelegramUsers { get; set; }
     }
 }

@@ -1,8 +1,10 @@
 ﻿namespace Api.Domain;
 
-public interface IReadOnlyRepo<TEntity, TKey> where TEntity: Entity
+public interface IReadOnlyRepo<TEntity, TEntityId> 
+    where TEntity: Entity<TEntityId>
+    where TEntityId: struct
 {
-    IAsyncEnumerable<TEntity> GetAsync();
+    IAsyncEnumerable<TEntity> GetAllAsync();
 
-    ValueTask<TEntity?> GetAsync(TKey id);
+    ValueTask<TEntity?> GetByIdAsync(TEntityId id);
 }

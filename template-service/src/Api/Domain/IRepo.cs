@@ -1,7 +1,10 @@
 ﻿namespace Api.Domain;
 
-public interface IRepo<TEntity, TKey> where TEntity : Entity
+public interface IRepo<TEntity, TEntityId> 
+    where TEntity : Entity<TEntityId>
+    where TEntityId : struct
 {
-    ValueTask<TKey> AddAsync(TEntity entity);
+    ValueTask<TEntityId> CreateAsync(TEntity entity);
+    ValueTask<bool> UpdateAsync(TEntity entity);
 }
  

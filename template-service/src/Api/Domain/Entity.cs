@@ -1,9 +1,8 @@
 ﻿namespace Api.Domain
 {
-    public class Entity
+    public class Entity<TEntityId>
+        where TEntityId : struct
     {
-        public int? Id { get; set; }
-
-        public string Name { get; set; }
+        public TEntityId? Id { get; set; }
     }
 }
