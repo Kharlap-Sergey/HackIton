@@ -6,8 +6,7 @@ namespace Api.Infrastructure
     {
         public static IServiceCollection AddEntityRepo(this IServiceCollection services)
         {
-            services.AddScoped<IRepo<Entity, int?>, EntityRepo>();
-            services.AddScoped<IReadOnlyRepo<Entity, int>, EntityRepo>();
+            services.AddScoped<ITelegramUserInfoRepository, TelegramUserInfoRepository>();
    
             return services;
         }
